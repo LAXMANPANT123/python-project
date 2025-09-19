@@ -10,4 +10,23 @@ def speak(text):
     tts.save(filename)
     playsound.playsound(filename)
 
-speak("cristiano ronaldo is the goat")
+def get_audio():
+    r = sr.Recognizer()
+    with sr.Microphone()  as source:
+        audio = r.listen(source)
+        said = ""
+
+        try:
+            said = r.recognize_google(audio)
+            print(said)
+        except Exception as e:
+            print("exception: " + str(e))
+    return said
+
+text = get_audio()
+
+if "hello" in text:
+    speak("hello, how are u i am good and what's new")
+
+
+
